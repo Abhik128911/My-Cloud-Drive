@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cloud Drive</title>
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/static/styles.css">
+
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- NEW: Link to Dropzone.js CSS for upload functionality -->
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+</head>
+<body>
+
+    <header>
+        <h1><i class="fas fa-cloud"></i> My Cloud Drive</h1>
+        <nav>
+            <button id="change-password-btn" class="admin-action" style="display:none;"><i class="fas fa-key"></i> Change Password</button>
+            <a href="/login.html" id="auth-link">Admin Login</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Toolbar for file and folder actions -->
+        <div class="toolbar">
+            <!-- NEW: Back button -->
+            <button id="back-btn" style="display:none;"><i class="fas fa-arrow-left"></i> Back</button>
+            <button id="upload-btn" class="admin-action"><i class="fas fa-upload"></i> Upload</button>
+            <button id="create-folder-btn" class="admin-action"><i class="fas fa-folder-plus"></i> New Folder</button>
+            <button id="create-file-btn" class="admin-action"><i class="fas fa-file-alt"></i> New File</button>
+            <button id="copy-btn" class="admin-action"><i class="fas fa-copy"></i> Copy</button>
+            <button id="paste-btn" class="admin-action"><i class="fas fa-paste"></i> Paste</button>
+            <button id="delete-btn" class="admin-action"><i class="fas fa-trash"></i> Delete</button>
+        </div>
+
+        <!-- NEW: This form is the dropzone for uploads. It's styled by Dropzone.js -->
+        <form id="upload-dropzone" class="dropzone" style="display:none;"></form>
+
+        <!-- This is the main area for the file explorer UI -->
+        <div class="file-explorer">
+            <div id="file-tree-container">
+                <!-- File and folder tree is dynamically generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for changing password -->
+    <div id="password-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Change Admin Password</h2>
+            <form id="password-change-form">
+                <div id="modal-error-message" class="error" style="display:none;"></div>
+                <div class="input-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <button type="submit">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Cloud Storage Project</p>
+    </footer>
+
+    <!-- NEW: Link to Dropzone.js library -->
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <!-- Link to your JavaScript file -->
+    <script src="/static/main.js"></script>
+
+</body>
+</html>

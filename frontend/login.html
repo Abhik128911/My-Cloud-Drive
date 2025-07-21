@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - My Cloud Drive</title>
+
+    <!-- Link to your CSS file for consistent styling -->
+    <link rel="stylesheet" href="/static/styles.css">
+
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <form id="login-form">
+            <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+
+            <!-- This div will display login errors from the server -->
+            <div id="error-message" class="error" style="display:none;"></div>
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <div class="back-link">
+                <a href="/"><i class="fas fa-arrow-left"></i> Back to Cloud Drive</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            // Prevent the default form submission which reloads the page
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessageDiv = document.getElementById('error-message');
+
+            // *** FIX: Use the correct API endpoint for logging in ***
+            const response = await fetch('/api/login', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                // If login is successful, redirect to the main file explorer
+                window.location.href = '/';
+            } else {
+                // If there's an error, display it
+                const errorData = await response.json();
+                errorMessageDiv.textContent = errorData.message || 'Invalid username or password.';
+                errorMessageDiv.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
